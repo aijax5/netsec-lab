@@ -5,10 +5,10 @@ import hashlib
 def hashString(msg):
     return hashlib.sha256(msg.encode()).hexdigest()
 
-def receive():
+def main():
     while True:
         try:
-            msg = sock.recv(BUFSIZ).decode("utf8")
+            msg = sock.recv(BuffSize).decode("utf8")
             if(msg[0] == '0'):
                 print("server: ", msg[1:])
             else:
@@ -28,11 +28,12 @@ def receive():
 
         except OSError:
             break
-
-HOST = "127.0.0.1"
-PORT = 8008
-BUFSIZ = 1024
-ADDR = (HOST, PORT)
-sock = socket(AF_INET, SOCK_STREAM)
-sock.connect(ADDR)
-receive()
+        
+if(__name__ == "__main__"):
+    HOST = "127.0.0.1"
+    PORT = 8008
+    BuffSize = 1024
+    ADDR = (HOST, PORT)
+    sock = socket(AF_INET, SOCK_STREAM)
+    sock.connect(ADDR)
+    main()

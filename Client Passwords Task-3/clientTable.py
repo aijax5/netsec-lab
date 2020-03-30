@@ -6,7 +6,7 @@ users = {}
 
 HOST = "127.0.0.1"
 PORT = 8008
-BUFSIZ = 1024
+BuffSize = 1024
 ADDR = (HOST,PORT)
 SOCK = socket(AF_INET, SOCK_STREAM)
 SOCK.bind(ADDR)
@@ -22,14 +22,14 @@ def connectClients():
 
 def registerUser(conn):
     conn.send("Please enter 4 digit user ID".encode("utf8")) 
-    uid = conn.recv(BUFSIZ).decode("utf8")
+    uid = conn.recv(BuffSize).decode("utf8")
     if uid in users:
         print("user ID : %s has already registered",uid)
         conn.send(("9user ID : %s has already registered" % uid).encode())
         return
-    welcome = '2user ID : %s \nPlease enter a password:\n' % uid
-    conn.send(bytes(welcome, "utf8"))
-    pswd = conn.recv(BUFSIZ).decode("utf8")
+    msg2 = '2user ID : %s \nPlease enter a password:\n' % uid
+    conn.send(bytes(msg2, "utf8"))
+    pswd = conn.recv(BuffSize).decode("utf8")
     print(pswd)
     users[uid] = pswd
     clients[uid] = conn
