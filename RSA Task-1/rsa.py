@@ -97,7 +97,7 @@ class RSA:
 if __name__ =='__main__':
     rsa = RSA()
     while(True):
-        print("-----------** THE RSA API **------------------")
+        print("----------------**** THE RSA API ****----------------")
         print("Select option\n1. Encrypt\n2. Decrpyt\n3. Get Public key of the CryptoSystem\n4. Exit \n")
         ip = int(input())
         if ip == 1:
