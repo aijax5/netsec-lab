@@ -3,7 +3,12 @@ _____ created RSA cryptosystem with  following configuration _____
 randomly choosen primes p =  11  q =  26
 public key (e, phi(n)) =  (207, 286)
 private key d =  93
-every client is uniquely identified with a user id
+
+""
+    every client is uniquely identified with a user id
+            
+""
+
 Enter 4-digit user id: 6566 
 (207, 286)
 MENU
@@ -18,6 +23,7 @@ MENU
 2.Query a Public key
 3.Exit
 Choose a option: 3   
+
 aijax@aijax:~/Documents/NS/netsec-lab/RSA table$ python3 client.py 
 _____ created RSA cryptosystem with  following configuration _____
 randomly choosen primes p =  23  q =  14
@@ -36,10 +42,4 @@ public key of 6566 is ( 207 , 286)
 MENU
 1. Update RSA
 2.Query a Public key
-
-
-
-
-
-
 

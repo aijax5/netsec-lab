@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     SOCK.listen(5)
     print("server is up and running...")
-    ACCEPT_THREAD = Thread(target=connectClients)
-    ACCEPT_THREAD.start()  
-    ACCEPT_THREAD.join()
+    t = Thread(target=connectClients)
+    t.start()  
+    t.join()
     SOCK.close()

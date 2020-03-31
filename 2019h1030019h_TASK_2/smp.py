@@ -19,9 +19,7 @@ class Alice:
     
     def generateResults(self,z,p):
         if z[self.x ]%p == self.m1 % p :
-            print("Bob's value is greater than Alice's")
             return False
-        print("Value of Alice is greater than Bob's")
         return True
     
 
@@ -43,13 +41,6 @@ class Bob:
         random.seed(datetime.now())   
         while count != 0:
             count = 0
-
-            # self.p = random.randrange(2,m1)
-            # # print("fermat ka  p",self.p)
-            # while(not self.util.isPrime(self.p )):
-            #     self.p = random.randrange(2,m1)
-            #     # print(self.p,"loppa")
-            # print("set p as" ,self.p)
             self.p =p
             # input("p ki toh")
             z= list(range(xr+1))
@@ -64,11 +55,8 @@ class Bob:
                         break         
                 if count >0:
                     break
-            print(z)
-
         self.z = z
-        print(z,"!!!done..")
-        # self.p = p
+
         for i in range(1,xr+1):
             if i>y:
                 self.z[i] = self.z[i]+1
