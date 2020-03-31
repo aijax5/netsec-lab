@@ -61,7 +61,7 @@ class RSA:
             return x%self.tot
         
         self.d = getPrivateKey()
-        print("_____ created RSA cryptosystem with  following configuration _____")
+        print("_____ created a RSA cryptosystem with following configuration _____")
         print("randomly choosen primes p = ",self.p," q = ",self.q)
         print("public key (e, phi(n)) = ",self.PU)
         print("private key d = ", self.d)
@@ -70,20 +70,22 @@ class RSA:
         print(self.PU)
         return self.PU
 
-    def encrypt(self):
+    def encrypt(self,PUKY = self.PU):
         m = int(input("Please enter a message (format: INT32 < "+str(self.n)+" )"))
-        temp = self.e
+        e = PUKY[0]
+        n = PUKY[1]
+        temp = e
         c =1
         while(temp):
             c = (c*m )
-            c %= self.n
+            c %= n
             temp -= 1
-        c = c % self.n
+        c = c % n
         print("cipher text of message M = ",m," is C = ",c)
         return c
 
     def decrypt(self):
-        c = int(input("Please enter a message (format: INT32 < "+str(self.n)+" )"))
+        c = int(input("Please enter a cipher (format: INT32 < "+str(self.n)+" )"))
         c= int(c)
         temp = self.d
         m =1
@@ -92,7 +94,7 @@ class RSA:
             m %= self.n
             temp -= 1
         m = m % self.n
-        print("Plain text of cipher = ",c," is m = ",m)
+        print("Plain text of cipher c = ",c," is m = ",m)
         
 if __name__ =='__main__':
     rsa = RSA()

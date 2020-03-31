@@ -1,17 +1,22 @@
 import random
-
+nr =    50
 class Utilities:
-    def fermatTest(self,p):
-        a = random.randrange(1,p-1)
-        if  (a**p - a)%p :
-            return False
-        return True
-    
+
     def gcd(self,a,b):
-        if (b == 0):
-            return a
-        else:
-            return self.gcd(b, a % b)
+            if (b == 0):
+                return a
+            else:
+                return self.gcd(b, a % b)
+
+    def isPrime(self,p, count = 1):
+        isprime = 1 # assume p is prime 
+        for i in range(2, p//2+1): 
+            if p % i == 0:
+                isprime = 0 # not a prime as i divides p 
+                break
+        if isprime==1:
+            return True # True
+        return False # False
 
     def euclidean_gcd(self,a,b):
         x, old_x = 0, 1
@@ -27,18 +32,21 @@ class Utilities:
 
 class RSA:
 
-    def __init__(self):
+    def __init__(self,keys = -1):
         self.util = Utilities()
-        self.createCrypoSystem()
-
+        if keys == -1:
+            self.createCrypoSystem()
+        else:
+            self.PU,self.d = keys
+            self.e,self.n = self.PU
     def setPrimes(self):
-        self.p = random.randrange(2,50)
-        while(not self.util.fermatTest(self.p)):
-            self.p = random.randrange(2,50)
+        self.p = random.randrange(2,nr)
+        while(not self.util.isPrime(self.p)):
+            self.p = random.randrange(2,nr)
         
-        self.q = random.randrange(10,50)
-        while(self.q == self.p or not self.util.fermatTest(self.p)):
-            self.q = random.randrange(10,50)
+        self.q = random.randrange(2,nr)
+        while(self.q == self.p or not self.util.isPrime(self.p)):
+            self.q = random.randrange(2,nr)
 
     
     def createCrypoSystem(self):
@@ -70,20 +78,23 @@ class RSA:
         print(self.PU)
         return self.PU
 
-    def encrypt(self):
-        m = int(input("Please enter a message (format: INT32 < "+str(self.n)+" )"))
-        temp = self.e
+    def encrypt(self,m,PUKY = -1):
+        if PUKY == -1:
+            e,n = self.PU
+        else:
+            e,n = PUKY
+
+        temp = e
         c =1
         while(temp):
             c = (c*m )
-            c %= self.n
+            c %= n
             temp -= 1
-        c = c % self.n
+        c = c % n
         print("cipher text of message M = ",m," is C = ",c)
         return c
 
-    def decrypt(self):
-        c = int(input("Please enter a cipher (format: INT32 < "+str(self.n)+" )"))
+    def decrypt(self,c):
         c= int(c)
         temp = self.d
         m =1
@@ -92,7 +103,8 @@ class RSA:
             m %= self.n
             temp -= 1
         m = m % self.n
-        print("Plain text of cipher c = ",c," is m = ",m)
+        # print("Plain text of cipher c = ",c," is m = ",m)
+        return m
         
 if __name__ =='__main__':
     rsa = RSA()
